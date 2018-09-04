@@ -12,11 +12,13 @@
         <Map :placeData="activePlace"></Map>
       </div>
     </div>
-       <div class="test"></div>
-    
+
     <transition name="fade">
       <el-button class="minority-btn" type="warning" circle @click="minClickBtn" v-if="!assistantMenu">少数<br/>民族</el-button>
     </transition>
+
+    <p class="bottom-end"><i>-- 到底了 --</i></p>    
+    
   </div>
 </template>
 
@@ -94,7 +96,7 @@ export default {
   // 飞出
   .fade-enter-active, .fade-leave-active {
     transition: all .5s;
-    transform: translateX(-10px) translateY(0);
+    transform: translateX(0px) translateY(0);
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     // opacity: 0;

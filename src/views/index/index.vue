@@ -5,7 +5,7 @@
       <h2 class="title-text-one">Place</h2>
       <!-- 顶部导航 -->
       <header class="header-top">
-        <header-top :title="['search','login']"></header-top>
+        <header-top :title="['search','','menu']" :types="false"></header-top>
       </header>
       <!-- 展示选中省份的轮播（indexShow字段） -->
       <div class="carousel-wrap flex-vertical-center">
@@ -22,6 +22,16 @@
       </div>
       <!-- 今日推荐的民族 -->
     </div>
+
+    <!-- 更多菜单 -->
+    <!-- 副菜单（显示少数民族列表等） -->
+    <transition name="fade">
+      <div class="index-menu-box" v-if="indexMenuState" >
+        <index-menu v-clickoutside="closeMenu" :listData="indexMenuList"></index-menu>
+        <div class="index-menu-mask" @click="closeMenu"></div>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -31,10 +41,11 @@
  */
   import { mapGetters } from 'vuex'
   import { HeaderTop, IndexMenu } from '../../components/components'
+  import { APP_INDEX_MENU_STATE } from '../../store/types'
   export default {
     name: '',
     computed: {
-      ...mapGetters(['placeListShow','innerSize']),
+      ...mapGetters(['placeListShow','innerSize','indexMenuState','indexMenuList']),
       place(){
         return this.placeListShow
       }
@@ -77,6 +88,9 @@
           message: '正在录入',
           type: 'warning'
         })
+      },
+      closeMenu(){
+        this.$store.commit(APP_INDEX_MENU_STATE, false)
       }
     }
   }
@@ -98,7 +112,7 @@
     height: 100%;
   }
   .header-top{
-    width: 160px;
+    width: 92px;
   }
   .carousel-wrap{
     margin: 0 auto;
@@ -109,7 +123,7 @@
     // bottom: 0;
     // left: 0;
     .el-carousel{
-      margin-top: 100px;
+      margin-top: 80px;
       width: 100%;
     }
     // .el-carousel__item--card{
@@ -140,6 +154,34 @@
         padding: 24px 0;
       }
     }
+  }
+  // 菜单
+  .index-menu-box{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    .index-menu-wrap{
+      flex-basis: 70%;
+      // flex-grow: 4;
+    }
+    .index-menu-mask{
+      flex-basis: 30%;
+      // flex-grow: 1;
+      background: rgba(0,0,0,.3);
+    }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: all .5s;
+    transform: translateX(0px);
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    transform: translateX(-400px);
   }
 }
 </style>

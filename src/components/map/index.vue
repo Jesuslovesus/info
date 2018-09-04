@@ -72,6 +72,7 @@
   width: 100%;
   height: 230px;
   transition: all .5s;
+  box-shadow: 0 0 6px #cccccc;  
   .fill{
     position: absolute;
     bottom: 10px;

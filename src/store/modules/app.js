@@ -1,16 +1,18 @@
 import * as types from './../types'
-import {aboutData} from '../../common/data/structure'
+import {aboutData, indexMenuData} from '../../common/data/structure'
 
 const app = {
   state: {
     userInfo: null,
     fundFirm: null,
     menuState: false,
+    indexMenuState: false,
     menuBtnColor: '#DCDFE6',
     aboutPageData: aboutData,
     assistantMenu: false,
     loginBox: false,
-    // 当前屏幕可视区域大小
+    indexMenuList: indexMenuData,
+    // 当前屏幕可视区域
     innerSize: {
       width: 0,
       height: 0,
@@ -33,6 +35,10 @@ const app = {
         return
       }
       state.menuState = data
+    },
+    // 主页的菜单列表 APP_INDEX_MENU_STATE
+    [types.APP_INDEX_MENU_STATE]: (state, data) => {
+      state.indexMenuState = data
     },
     [types.APP_MENU_BTN_COLOR]: (state, data) => {
       state.menuBtnColor = data

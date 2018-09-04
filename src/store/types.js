@@ -8,6 +8,7 @@ export const APP_MENU_BTN_COLOR = 'APP/APP_MENU_BTN_COLOR'
 export const APP_ASSISTANT_MENU = 'APP/APP_ASSISTANT_MENU'
 export const APP_LOGIN_BOX = 'APP/APP_LOGIN_BOX'
 export const APP_INNER_SIZE = 'APP/APP_INNER_SIZE'
+export const APP_INDEX_MENU_STATE = 'APP/APP_INDEX_MENU_STATE'
 /**
  * permission
  */
