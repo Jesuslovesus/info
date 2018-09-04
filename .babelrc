@@ -1,0 +1,16 @@
+{
+  "presets":[
+    "env","stage-2"
+  ],
+  "plugins": 
+  ["transform-runtime", "transform-vue-jsx",
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ],
+  "comments": false
+}
