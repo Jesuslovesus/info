@@ -9,6 +9,7 @@ import getters from './getters'
 import permission from './modules/permission'
 import place from './modules/place'
 // 分布在各模块中的 store
+import addnation from '../views/control-center/store/addnation'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
   modules: {
     app,
     permission,
-    place
+    place,
+    addnation
   },
   getters,
   strict: debug,

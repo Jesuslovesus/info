@@ -45,6 +45,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 @import '../../assets/style/app-menu.less';
+  // .header-top-left{
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   width: 50px;
+  //   height: 60px;
+  //   z-index: 10;
+  // }
   footer{
     position: absolute;
     bottom: 15px;

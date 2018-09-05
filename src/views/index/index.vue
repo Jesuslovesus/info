@@ -7,20 +7,44 @@
       <header class="header-top">
         <header-top :title="['search','','menu']" :types="false"></header-top>
       </header>
-      <!-- 展示选中省份的轮播（indexShow字段） -->
+      <!-- table -->
+      <div class="table-title flex-vertical-center">
+        <el-button :class="{'active': showTable == 'today'}" size="small" @click="btnClick('today')">今日民族</el-button>
+        <el-button :class="{'active': showTable == 'place'}" size="small" @click="btnClick('place')">省份列表</el-button>
+      </div>    
+
+      <!-- table wrap -->
+
+      
       <div class="carousel-wrap flex-vertical-center">
-        <!-- :height="`${innerSize.height/10*6}px`" -->
-        <el-carousel :interval="5000" type="card" height="400px" arrow="always" :autoplay="true">
-          <el-carousel-item v-for="(item, index) in place" :key="index">
-            <div class="con-box"  @click="placeClick(item)">
-              <div :style="{'background-image': `url(${bgImg(item.value)})`}" class="img-box">
-              </div>
-              <p>{{item.label}}</p>
-            </div>
-          </el-carousel-item>
+
+        <el-carousel :interval="5000" :autoplay="false" arrow="never" height="400px" indicator-position="none" ref="carousel">
+              <!-- 今日民族 -->
+              <el-carousel-item class="item-box" :name="'today'">
+                <div class="today-content flex-vertical-center">
+                  每天推送的一个民族，开发中
+                </div>
+              </el-carousel-item>
+              <!-- 展示选中省份的轮播（indexShow字段） -->
+              <el-carousel-item class="item-box" :name="'place'">
+                <!-- :height="`${innerSize.height/10*6}px`" -->
+                <el-carousel :interval="5000" type="card" height="386px" arrow="always" :autoplay="true">
+                  <el-carousel-item v-for="(item, index) in place" :key="index">
+                    <div class="con-box"  @click="placeClick(item)">
+                      <div :style="{'background-image': `url(${bgImg(item.value)})`}" class="img-box">
+                      </div>
+                      <p>{{item.label}}</p>
+                    </div>
+                  </el-carousel-item>
+                </el-carousel>
+              </el-carousel-item>
         </el-carousel>
+
+        
       </div>
-      <!-- 今日推荐的民族 -->
+
+
+
     </div>
 
     <!-- 更多菜单 -->
@@ -52,11 +76,13 @@
     },
     data() {
       return {
+        showTable: 'today',
         bg: ''
       }
     },
     mounted() {
       this.$nextTick(()=>{
+        // console.log(this.innerSize)
         this.init()
       })
     },
@@ -91,6 +117,10 @@
       },
       closeMenu(){
         this.$store.commit(APP_INDEX_MENU_STATE, false)
+      },
+      btnClick(index){
+        this.showTable = index
+        this.$refs.carousel.setActiveItem(index)
       }
     }
   }
@@ -99,61 +129,65 @@
 <style scoped lang="less">
 @import '../../assets/style/color.less';
 .place-wrap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: @blue-dark;
-  .con-wrap {
-    z-index: 9;    
-    position: absolute;
+  box-sizing: border-box;
+  .active{
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+  }
+  .today-content{
     width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }
+  .con-wrap {
     height: 100%;
   }
   .header-top{
     width: 92px;
   }
+  .table-title{
+    height: 60px;
+  }
   .carousel-wrap{
     margin: 0 auto;
     max-width: 700px;
     width: 100%;
-    // height: 100%;
-    // position: absolute;
-    // bottom: 0;
-    // left: 0;
-    .el-carousel{
-      margin-top: 80px;
+    .el-carousel {
+      // margin-top: 80px;
       width: 100%;
     }
-    // .el-carousel__item--card{
-    //   width: 80%;
-    // }
-    .el-carousel__item {
-      overflow: inherit;
-    }
-    .con-box{
-      box-shadow: 0px 0 6px rgba(0,21,41,.35);      
-      margin-left: -25%;
-      width: 150%;
-      height: 100%;
-      background-color: antiquewhite;
-      .img-box{
-        width: 100%;
-        height: 330px;
-        overflow: hidden;
-        text-align: center;
-        background-size: 200% 100%; 
-        background-repeat: no-repeat; 
-        background-position: 25% 0;
+    .item-box {
+      
+      .el-carousel__item {
+        overflow: inherit;
       }
-      p{
-        font-size: 22px;
-        text-align: center;
-        background: @white;
-        padding: 24px 0;
+      .con-box{
+        box-shadow: 0px 0 6px rgba(0,21,41,.35);      
+        margin-left: -25%;
+        width: 150%;
+        height: 100%;
+        background-color: antiquewhite;
+        .img-box{
+          width: 100%;
+          height: 316px;
+          overflow: hidden;
+          text-align: center;
+          background-size: 200% 100%; 
+          background-repeat: no-repeat; 
+          background-position: 25% 0;
+        }
+        p{
+          font-size: 22px;
+          text-align: center;
+          background: @white;
+          padding: 24px 0;
+        }
       }
     }
+    
   }
   // 菜单
   .index-menu-box{
