@@ -6,7 +6,7 @@
       <el-menu-item v-for="(item,index) in listData" :index="item.id.toString()" :key="index"  @click="menuClick(item)">
         <!-- <i :class="item.icon"></i> -->
         <span>{{item.label}}{{item.id}}</span>
-        》占比-----人口
+        》占比-----人口1
       </el-menu-item>
     </el-menu>
     <!-- </div> -->
@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     menuClick(value){
+      document.documentElement.scrollTop = 0
       // 获取指定少数民族详细信息
       this.$store.dispatch('Get_minorityContent', value.id)
       this.$store.commit(types.APP_ASSISTANT_MENU, false)
@@ -54,7 +55,10 @@ export default {
   position: relative;
   background-color: #ffffff;
   box-shadow: 0 4px 5px 0 rgba(0,0,0,.1);
+  box-sizing: border-box;
+  padding-top: 22px;
   >p{
+    margin-top: -22px;
     text-align: center;
     line-height: 16px;
     padding-top: 6px;
@@ -62,6 +66,7 @@ export default {
   .el-menu{
     background-color: transparent;
     border: none;
+    height: 100%;
     // .el-menu-item:focus, .el-menu-item:hover{
       // background-color: transparent;
       // i,span{
@@ -69,11 +74,11 @@ export default {
       // }
     // }
     .el-menu-item, .el-submenu__title {
-      height: 46px;
-      line-height: 46px;
+      // height: 46px;
+      // line-height: 46px;
     }
     li{
-      padding-left: 20px !important;
+      // padding-left: 20px !important;
       // i,span{
       //   color: @white;  
       //   font-size: 20px;              

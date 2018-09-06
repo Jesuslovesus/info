@@ -50,6 +50,7 @@ export default {
       }
     },
     minClickBtn(){
+      // document.documentElement.scrollTop = 0
       this.$store.commit(types.APP_ASSISTANT_MENU, true)
     }
   }

@@ -4,7 +4,7 @@
     <div class="search-box">
       <div class="search-center-wrap">
         <searcher v-if="statusType" :placeholder="'请输入民族名称或拼音'" type="simple" :searchData="minorityListAll" :searchKeys="sourceKeys" @search="globalSearch"></searcher>
-        <searcher v-else :placeholder="'请输入省份名称或拼音'" type="simple" :searchData="placeListData" :searchKeys="sourceKeys" @search="placeGlobalSearch"></searcher>
+        <searcher v-else :placeholder="'请输入省份名称或拼音'" type="simple" :searchData="placeListData" :searchKeys="sourceKeys" @search="placeGlobalSearch" @focus="focus" @blur="blur"></searcher>
         
         <!-- <el-select @change="selectChange" size="small" v-else v-model="provinces" filterable :filter-method="handleCityFilter" 
           placeholder="请输入省份名称或拼音">
@@ -140,6 +140,14 @@ export default {
       this.$store.dispatch('Get_activePlace',this.provincesId).then(()=>{
         this.$router.push({path: '/layout/place'})
       })
+    },
+    focus(val){
+      this.selectplace = val
+    },
+    blur(val){
+      setTimeout(()=>{
+        this.selectplace = val
+      },0)
     }
   }
 }

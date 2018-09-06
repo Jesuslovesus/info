@@ -28,7 +28,7 @@
               <!-- 展示选中省份的轮播（indexShow字段） -->
               <el-carousel-item class="item-box" :name="'place'">
                 <!-- :height="`${innerSize.height/10*6}px`" -->
-                <el-carousel :interval="5000" type="card" height="386px" arrow="always" :autoplay="true">
+                <el-carousel :interval="5000" type="card" height="386px" arrow="always" :autoplay="proAutoplay">
                   <el-carousel-item v-for="(item, index) in place" :key="index">
                     <div class="con-box"  @click="placeClick(item)">
                       <div :style="{'background-image': `url(${bgImg(item.value)})`}" class="img-box">
@@ -39,12 +39,7 @@
                 </el-carousel>
               </el-carousel-item>
         </el-carousel>
-
-        
       </div>
-
-
-
     </div>
 
     <!-- 更多菜单 -->
@@ -77,7 +72,7 @@
     data() {
       return {
         showTable: 'today',
-        bg: ''
+        proAutoplay: false
       }
     },
     mounted() {
@@ -121,6 +116,11 @@
       btnClick(index){
         this.showTable = index
         this.$refs.carousel.setActiveItem(index)
+        if(index === 'place'){
+          this.proAutoplay = true
+          return
+        }
+        this.proAutoplay = false
       }
     }
   }

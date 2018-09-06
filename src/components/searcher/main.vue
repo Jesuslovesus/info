@@ -1,6 +1,6 @@
 <template>
   <div class="searcher">
-    <el-input size="small" :placeholder="placeholder" v-model="search" v-if="type === 'simple'">
+    <el-input size="small" :placeholder="placeholder" v-model="search" v-if="type === 'simple'" @focus="focus" @blur="blur">
         <i slot="suffix" class="el-input__icon el-icon-search"></i>      
     </el-input>
     <div v-else>
@@ -58,6 +58,12 @@ export default {
     },
     searchBlur() {
       this.isSearch = false
+    },
+    focus(){
+      this.$emit('focus', true)
+    },
+    blur(){
+      this.$emit('blur', false)
     }
   },
   watch: {

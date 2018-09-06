@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pray-wrap">
     pray
   </div>
 </template>
@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-
+.pray-wrap{
+  min-height: 100vh;
+}
 </style>
