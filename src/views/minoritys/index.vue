@@ -53,9 +53,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import searcher from '../../components/searcher/main'
-import * as types from './../../store/types'
-// import { searchfiler } from '../../common/utils'
+import searcher from '@/components/searcher/main'
+import * as types from '@/store/types'
+// import { searchfiler } from '@/common/utils'
 
 
 export default {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { searchfiler } from '../../common/utils'
+import { searchfiler } from '@/common/utils'
 
 export default {
   name: 'searcher',

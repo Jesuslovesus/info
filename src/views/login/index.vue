@@ -23,9 +23,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { APP_LOGIN_BOX } from '../../store/types'
-import { postLinkData } from '../../common/fetch'
-import func from '../../common/func'
+import { APP_LOGIN_BOX } from '@/store/types'
+// import { postLinkData } from '@/common/fetch'
+// import func from '@/common/func'
 
 export default {
   name: '',
@@ -51,17 +51,17 @@ export default {
       //   type: 'warning',
       //   center: true
       //   })
-      postLinkData({
-        url: func.login,
-        data: {
-          username: this.username,
-          password: this.password
-        }
-      }).then(data => {
-        console.log(data)
-      }).catch(data => {
-        console.log(data)
-      })
+      // postLinkData({
+      //   url: func.login,
+      //   data: {
+      //     username: this.username,
+      //     password: this.password
+      //   }
+      // }).then(data => {
+      //   console.log(data)
+      // }).catch(data => {
+      //   console.log(data)
+      // })
       // this.$store.commit(APP_MENU_STATE, false)
     },
     register(){

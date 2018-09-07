@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { appMenu } from '../../components/components'
+import { appMenu } from '@/components/components'
 export default {
   name: 'layout',
   extends: appMenu

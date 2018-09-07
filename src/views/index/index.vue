@@ -59,8 +59,8 @@
  * 提高首页加载速度，此页面跟layout同级，打开网站后直接进入此页面
  */
   import { mapGetters } from 'vuex'
-  import { HeaderTop, IndexMenu } from '../../components/components'
-  import { APP_INDEX_MENU_STATE } from '../../store/types'
+  import { HeaderTop, IndexMenu } from '@/components/components'
+  import { APP_INDEX_MENU_STATE } from '@/store/types'
   export default {
     name: '',
     computed: {
