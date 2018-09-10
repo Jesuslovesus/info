@@ -1,0 +1,1 @@
+webpackJsonp([0],{"J/TN":function(n,e,r){n.exports=r.p+"indexStatic/img/yunnan.78d6108.jpeg"},ypl4:function(n,e,r){function t(n){return r(o(n))}function o(n){var e=i[n];if(!(e+1))throw new Error("Cannot find module '"+n+"'.");return e}var i={"./yunnan.jpeg":"J/TN"};t.keys=function(){return Object.keys(i)},t.resolve=o,n.exports=t,t.id="ypl4"}});
