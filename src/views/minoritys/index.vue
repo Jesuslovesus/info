@@ -73,7 +73,7 @@ export default {
     const text = '已录入的少数民族'
     return {
       text,
-      sourceKeys: ['label','name'],
+      sourceKeys: ['label','name','vluae'],
       resultData: [],
       statusType: true,
       provincesLabel: text,

@@ -24,10 +24,10 @@
         <hr v-if="!userInfo" />
 
         <!-- 登出 -->
-        <el-menu-item :index="''" class="login" v-if="!userInfo" @click="logout">
+        <!-- <el-menu-item :index="''" class="login" v-if="!userInfo" @click="logout">
           <i class="iconfont icon-logout"></i>
           <span>Logout</span>
-        </el-menu-item>
+        </el-menu-item> -->
 
       </el-menu>
     </div>
