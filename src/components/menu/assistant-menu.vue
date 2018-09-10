@@ -41,7 +41,7 @@ export default {
       this.$store.dispatch('Get_minorityContent', value.id)
       this.$store.commit(types.APP_ASSISTANT_MENU, false)
       // 后期做两个，判断屏幕大小选择进入不同的路由页面
-      this.$router.push({path: '/layout/minority'})
+      this.$router.push({path: '/layout/minority',params: { id: 3},query: {id: value.id}})
     }
   }
 }

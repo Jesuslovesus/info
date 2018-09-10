@@ -100,7 +100,7 @@
       placeClick(list){
         if(list.show){
           this.$store.dispatch('Get_activePlace',list.id).then(()=>{
-            this.$router.push({path: '/layout/place'})
+            this.$router.push({path: '/layout/place',query: {id: list.id}})
           })
           return
         }

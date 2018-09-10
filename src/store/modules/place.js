@@ -65,7 +65,7 @@ const actions = {
       getLinkData({
         url: func.getProvincesList
       }).then(data => {
-        commit(types.PLACE_LIST,data)
+        commit(types.PLACE_LIST,data.results)
         resolve(data)
       })
     })
@@ -76,9 +76,9 @@ const actions = {
       getLinkData({
         url: `${func.getProvincesDetails}${id}`
       }).then(data => {
-        commit(types.ACTIVE_PLACE,data)
-        commit(types.MINORITY_LIST,data.nations)
-        resolve(data)
+        commit(types.ACTIVE_PLACE,data.results)
+        commit(types.MINORITY_LIST,data.results.nations)
+        resolve(data.results)
       })
     })
   },
@@ -88,8 +88,8 @@ const actions = {
       getLinkData({
         url: `${func.getProvincesDetails}${id}/nations`
       }).then(data => {
-        commit(types.MINORITY_CONTENT,data)
-        resolve(data)
+        commit(types.MINORITY_CONTENT,data.results)
+        resolve(data.results)
       })
     })
   },
@@ -99,8 +99,8 @@ const actions = {
       getLinkData({
         url: func.getMinorityListAll
       }).then(data => {
-        commit(types.MINORITY_LIST_ALL,data)
-        resolve(data)
+        commit(types.MINORITY_LIST_ALL,data.results)
+        resolve(data.results)
       })
     })
   },
@@ -110,8 +110,8 @@ const actions = {
       getLinkData({
         url: `${func.getMinorityList}${id}`
       }).then(data => {
-        commit(types.MINORITY_CONTENT,data)
-        resolve(data)
+        commit(types.MINORITY_CONTENT,data.results)
+        resolve(data.results)
       })
     })
   }

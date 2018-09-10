@@ -6,7 +6,7 @@
       <div class="weather-box">天气模块待开发</div>
     </div>
     <div class="con-wrap-text">
-      <div class="con-list-box">
+      <div class="con-list-box" v-if="activePlace.id">
         <h3>简介</h3>
         <p class="intro-one">{{activePlace.intro}}</p>
         <Map :placeData="activePlace"></Map>
@@ -39,6 +39,9 @@ export default {
     Map
   },
   mounted() {
+    if(!this.activePlace.id){
+      this.$store.dispatch('Get_activePlace', this.$route.query.id)
+    }
   },
   methods: {
     bgImg(value){
