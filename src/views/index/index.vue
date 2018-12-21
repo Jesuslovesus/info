@@ -2,7 +2,7 @@
   <div class="place-wrap">
     <!-- 首页 -->
     <div class="con-wrap">
-      <h2 class="title-text-one">Place</h2>
+      <h2 class="logo">intominority.com</h2>
       <!-- 顶部导航 -->
       <header class="header-top">
         <header-top :title="['search','','menu']" :types="false"></header-top>
@@ -18,12 +18,46 @@
       
       <div class="carousel-wrap flex-vertical-center">
 
-        <el-carousel :interval="5000" :autoplay="false" arrow="never" height="400px" indicator-position="none" ref="carousel">
+        <el-carousel :interval="10000" :autoplay="false" arrow="never" height="400px" indicator-position="none" ref="carousel">
               <!-- 今日民族 -->
               <el-carousel-item class="item-box" :name="'today'">
-                <div class="today-content flex-vertical-center">
-                  每天推送的一个民族，开发中
-                </div>
+                <!-- <div class="today-content flex-vertical-center">
+                  
+                </div> -->
+                <el-carousel :interval="5000" type="card" height="386px" arrow="never" indicator-position="none" :autoplay="minAutoplay">
+                  <!-- 概括 -->
+                  <el-carousel-item>
+                    <div class="con-box today" @click="goToday">
+                      <div class="img-box flex-vertical-center">
+                        <p class="a-content-text">
+                          {{minToday.content.survey.content}}
+                        </p>
+                      </div>
+                      <p class="b-title">{{minToday.label}}
+
+                        <el-button type="text">点击进入</el-button>
+                      </p>
+                    </div>
+                  </el-carousel-item>
+                  <!-- 简介 -->
+                  <!-- <el-carousel-item>
+                    <div class="con-box">
+                      <div class="img-box flex-vertical-center">
+                        简介
+                      </div>
+                      <p class="b-title">简介</p>
+                    </div>
+                  </el-carousel-item> -->
+                  <!-- 代祷事项 -->
+                  <!-- <el-carousel-item>
+                    <div class="con-box">
+                      <div class="img-box flex-vertical-center">
+                        代祷事项
+                      </div>
+                      <p class="b-title">代祷事项</p>
+                    </div>
+                  </el-carousel-item> -->
+                </el-carousel>
               </el-carousel-item>
               <!-- 展示选中省份的轮播（indexShow字段） -->
               <el-carousel-item class="item-box" :name="'place'">
@@ -31,9 +65,10 @@
                 <el-carousel :interval="5000" type="card" height="386px" arrow="always" :autoplay="proAutoplay">
                   <el-carousel-item v-for="(item, index) in place" :key="index">
                     <div class="con-box"  @click="placeClick(item)">
-                      <div :style="{'background-image': `url(${bgImg(item.value)})`}" class="img-box">
+                      <div class="img-box">
+                        <img :src="`${config.url}${item.img}`" alt="">
                       </div>
-                      <p>{{item.label}}</p>
+                      <p class="b-title">{{item.label}}</p>
                     </div>
                   </el-carousel-item>
                 </el-carousel>
@@ -60,19 +95,25 @@
  */
   import { mapGetters } from 'vuex'
   import { HeaderTop, IndexMenu } from '@/components/components'
+  import { getNationsData } from '@/common/doReauest'
   import { APP_INDEX_MENU_STATE } from '@/store/types'
+  import { config } from '@/common/config'
+
   export default {
     name: '',
     computed: {
-      ...mapGetters(['placeListShow','innerSize','indexMenuState','indexMenuList']),
+      ...mapGetters(['placeListShow','innerSize','indexMenuState','indexMenuList','placeListIndexShow','todayMinorityData']),
       place(){
-        return this.placeListShow
+        return this.placeListIndexShow
       }
     },
     data() {
       return {
+        config,
         showTable: 'today',
-        proAutoplay: false
+        proAutoplay: false,
+        minAutoplay: true,
+        minToday: null
       }
     },
     mounted() {
@@ -88,15 +129,21 @@
     methods: {
       init(){
         this.$store.dispatch('Get_Place')
+        // 今日民族，暂时用接口里的第一代替
+        getNationsData({
+          id: 1
+        }).then(data => {
+          this.minToday = data.results
+        })
       },
-      bgImg(value){
-        try {
-          return require(`./../../assets/img/index/${value}.jpeg`)
-        } catch (error) {
-          // eslint-disable-next-line
-          return require(`./../../assets/img/index/yunnan.jpeg`)
-        }
-      },
+      // bgImg(value){
+      //   try {
+      //     return require(`./../../assets/img/index/${value}.jpeg`)
+      //   } catch (error) {
+      //     // eslint-disable-next-line
+      //     return require(`./../../assets/img/index/yunnan.jpeg`)
+      //   }
+      // },
       placeClick(list){
         if(list.show){
           this.$store.dispatch('Get_activePlace',list.id).then(()=>{
@@ -118,9 +165,14 @@
         this.$refs.carousel.setActiveItem(index)
         if(index === 'place'){
           this.proAutoplay = true
+          this.minAutoplay = false
           return
         }
         this.proAutoplay = false
+        this.minAutoplay = true
+      },
+      goToday(){
+        this.$router.push({path: '/layout/minority',params: { id: 3},query: {id: this.minToday.id}})
       }
     }
   }
@@ -132,6 +184,7 @@
   min-height: 100vh;
   background-color: @blue-dark;
   box-sizing: border-box;
+  padding-top: 60px;
   .active{
     color: #fff;
     background-color: #409eff;
@@ -140,10 +193,19 @@
   .today-content{
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    // background-color: #fff;
   }
   .con-wrap {
     height: 100%;
+    h2{
+      height: 60px;
+      margin-top: -60px;
+      line-height: 60px;
+      color: #fff;
+      box-sizing: border-box;
+      padding-left: 24px;
+      font-size: 20px;
+    }
   }
   .header-top{
     width: 92px;
@@ -164,26 +226,48 @@
       .el-carousel__item {
         overflow: inherit;
       }
-      .con-box{
+      .con-box {
         box-shadow: 0px 0 6px rgba(0,21,41,.35);      
         margin-left: -25%;
         width: 150%;
         height: 100%;
-        background-color: antiquewhite;
+        background-color: paleturquoise;
+        
         .img-box{
           width: 100%;
           height: 316px;
           overflow: hidden;
           text-align: center;
-          background-size: 200% 100%; 
-          background-repeat: no-repeat; 
-          background-position: 25% 0;
+          // background-size: 200% 100%; 
+          // background-repeat: no-repeat; 
+          // background-position: 25% 0; 
+          img{
+            height: 100%;
+          }
+          p {
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            background: @white;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+          }
         }
-        p{
+        .today{
+          .img-box{
+            overflow: auto;
+          }
+        }
+        .b-title{
+          height: 22px;
           font-size: 22px;
           text-align: center;
           background: @white;
           padding: 24px 0;
+          button{
+            font-size: 14px;
+          }
         }
       }
     }
@@ -210,7 +294,7 @@
   }
 
   .fade-enter-active, .fade-leave-active {
-    transition: all .5s;
+    transition: all .3s;
     transform: translateX(0px);
   }
   .fade-enter, .fade-leave-to {

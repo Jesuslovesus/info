@@ -1,6 +1,12 @@
 <template>
   <div class="pray-wrap">
-    pray
+    <p>
+      筹划中
+    </p>
+   
+    <router-link to="/index">
+      <el-button type="primary">返回首页</el-button>
+    </router-link>
   </div>
 </template>
 
@@ -17,6 +23,10 @@ export default {
 
 <style scoped lang="less">
 .pray-wrap{
+  text-align: center;
   min-height: 100vh;
+  p{
+    padding: 20px 0;
+  }
 }
 </style>

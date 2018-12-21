@@ -4,7 +4,7 @@
       <div class="con-list-box">
         <h3>About</h3>
         <div v-for="(list,index) in aboutPageData" :key="index">
-          <h4 class="intro-one">{{list.title}}</h4>
+          <h4 class="intro-title">{{list.title}}</h4>
           <p class="intro-one">{{list.content}}</p>
         </div>
       </div>

@@ -5,7 +5,6 @@
       <el-button type="primary">返回首页</el-button>
     </router-link>
   </div>
-  
 </template>
 
 <script>
@@ -13,10 +12,10 @@
 
 <style scoped lang="less">
 // @import '../../../assets/style/color.less';
-.no-found-wrap{
+.no-found-wrap {
   text-align: center;
 }
-h2{
+h2 {
   padding: 20px 6px;
 }
 </style>

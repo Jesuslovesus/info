@@ -24,8 +24,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { Map } from '../../components/components'
-import * as types from './../../store/types'
+import { Map } from '@/components/components'
+import * as types from '@/store/types'
 
 export default {
   name: '',
@@ -72,6 +72,7 @@ export default {
   // overflow-y: auto;
   // overflow-x: hidden;
   background-color: @white;
+  min-height: 100vh;
   .title{
     width: 100%;
     height: 190px;
@@ -99,7 +100,7 @@ export default {
   }
   // 飞出
   .fade-enter-active, .fade-leave-active {
-    transition: all .5s;
+    transition: all .3s;
     transform: translateX(0px) translateY(0);
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {

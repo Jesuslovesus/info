@@ -5,8 +5,8 @@
     <el-menu>
       <el-menu-item v-for="(item,index) in listData" :index="item.id.toString()" :key="index"  @click="menuClick(item)">
         <!-- <i :class="item.icon"></i> -->
-        <span>{{item.label}}{{item.id}}</span>
-        》占比-----人口1
+        <span>{{`${index+1}、`}}{{item.label}}</span>
+        <!-- 》占人口1 -->
       </el-menu-item>
     </el-menu>
     <!-- </div> -->
@@ -56,12 +56,12 @@ export default {
   background-color: #ffffff;
   box-shadow: 0 4px 5px 0 rgba(0,0,0,.1);
   box-sizing: border-box;
-  padding-top: 22px;
+  padding-top: 32px;
   >p{
-    margin-top: -22px;
+    margin-top: -32px;
     text-align: center;
-    line-height: 16px;
-    padding-top: 6px;
+    line-height: 32px;
+    // padding-top: 6px;
   }
   .el-menu{
     background-color: transparent;

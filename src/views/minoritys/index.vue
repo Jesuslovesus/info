@@ -87,10 +87,14 @@ export default {
   },
   mounted() {
     this.searchProvinces = JSON.parse(JSON.stringify(this.placeListData))
-    // 获取所有的少数民族
-    this.$store.dispatch('Get_minorityListAll').then(data =>{
-      this.resultData = data
-    })
+    // 获取所有的少数民族，如果Vx里没有的话
+    if(this.minorityListAll.length === 0){
+      this.$store.dispatch('Get_minorityListAll').then(data =>{
+        this.resultData = data
+      })
+      return
+    }
+    this.resultData = this.minorityListAll
   },
   methods: {
     globalSearch(val) {
@@ -104,7 +108,7 @@ export default {
       this.$store.dispatch('Get_minorityContent', value.id)
       this.$store.commit(types.APP_ASSISTANT_MENU, false)
       // 后期做两个，判断屏幕大小选择进入不同的路由页面
-      this.$router.push({path: '/layout/minority'})
+      this.$router.push({path: '/layout/minority',params: { id: 3},query: {id: value.id}})
     },
     typeBtn(val) {
       this.provincesLabel = this.text
@@ -201,7 +205,7 @@ export default {
     li{
 
       cursor: pointer;
-      transition: all .5s;
+      transition: all .3s;
       
       box-sizing: border-box;
       background-color: rgb(231,242,255);

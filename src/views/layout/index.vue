@@ -70,7 +70,7 @@ export default {
     }
   }
   .fade-enter-active, .fade-leave-active {
-    transition: all .5s;
+    transition: all .3s;
     transform: translateX(0px);
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {

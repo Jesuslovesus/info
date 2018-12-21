@@ -36,8 +36,8 @@ export default {
   name: '',
   data() {
     return {
-      path: ['index','addnation'],
-      noClose: ['addnation','pray']
+      path: ['index'],
+      noClose: ['pray']
     }
   },
   components: {

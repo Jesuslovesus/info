@@ -7,12 +7,12 @@
     <div class="menu-list-flex">
       <el-menu :router="true">
         <!-- 登录 -->
-        <el-menu-item :index="''" class="login" v-if="!userInfo" @click="login">
+        <el-menu-item :index="''" class="login" v-if="userInfo" @click="login">
           <i class="iconfont icon-yonghu"></i>
           <span>Login</span>
         </el-menu-item>
 
-        <hr v-if="!userInfo" />
+        <hr v-if="userInfo" />
 
         <div class="menu-box" v-for="(item,index) in listData" :key="index"  @click="menuClick">
           <el-menu-item :index="router(item.path)">
@@ -20,7 +20,18 @@
             <span>{{item.value}}</span>
           </el-menu-item>
         </div>
+        <!-- {
+     value: 'AddNation',
+     label: '添加民族',
+     path: 'addnation',
+     icon: 'el-icon-circle-plus-outline'
+   }, -->
 
+        <!-- 添加民族 -->
+        <el-menu-item :index="''" @click="addNation">
+          <i class="el-icon-circle-plus-outline"></i>
+          <span>AddNation</span>
+        </el-menu-item>
         <hr v-if="userInfo" />
 
         <!-- 登出 -->
@@ -37,7 +48,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { APP_INDEX_MENU_STATE, APP_LOGIN_BOX } from '../../store/types'
+import { APP_INDEX_MENU_STATE, APP_LOGIN_BOX } from '@/store/types'
+import { config } from '@/common/config'
 export default {
   props: {
     listData: {
@@ -75,9 +87,18 @@ export default {
       this.$store.commit(APP_INDEX_MENU_STATE, false)
     },
     login(){
+      // this.$message({
+      //   showClose: true,
+      //   message: '稍后开放',
+      //   type: 'warning'
+      // })
       this.$store.commit(APP_LOGIN_BOX, true)
     },
-    logout(){}
+    logout(){
+    },
+    addNation(){
+      window.open(config.index)
+    }
   }
 }
 </script>

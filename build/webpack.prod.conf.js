@@ -11,6 +11,18 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+// 打包测试 getModuleName
+function getModuleName(module) {
+  var sign = 'node_modules';
+  var signIndex = module.resource.indexOf(sign);
+  var pathSeparator = module.resource.slice(signIndex - 1, signIndex);
+  var modulePath = module.resource.substring(signIndex + sign.length + 1);
+  var moduleName = modulePath.substring(0, modulePath.indexOf(pathSeparator) );
+  moduleName = moduleName.toLowerCase();
+
+  return moduleName
+}
+
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : require('../config/prod.env')
@@ -95,6 +107,29 @@ const webpackConfig = merge(baseWebpackConfig, {
             path.join(__dirname, '../node_modules')
           ) === 0
         )
+      }
+    }),
+
+    // 拆包测试
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vue',
+      chunks: ['vendor'],
+      minChunks: function (module, count) {
+        return module.resource && ~['vue', 'vue-router'].indexOf(getModuleName(module) ) && count >= 1
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'element-ui',
+      chunks: ['vendor'],
+      minChunks: function (module, count) {
+        return module.resource && ~['element-ui'].indexOf(getModuleName(module) ) && count >= 1
+      }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'echarts',
+      chunks: ['vendor'],
+      minChunks: function (module, count) {
+        return module.resource && ~['echarts', 'zrender'].indexOf(getModuleName(module) ) && count >= 1
       }
     }),
     // extract webpack runtime and module manifest to its own file in order to

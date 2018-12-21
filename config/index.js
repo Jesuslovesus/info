@@ -7,6 +7,7 @@ const path = require('path')
 module.exports = {
   dev: {
     // Paths
+    env: require('./dev.env'),
     assetsSubDirectory: 'indexStatic',
     assetsPublicPath: '/',
     proxyTable: {
@@ -22,7 +23,7 @@ module.exports = {
     // Various Dev Server settings
     host: '0.0.0.0',
     // can be overwritten by process.env.HOST
-    port: 8081,
+    port: 7777,
     // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,

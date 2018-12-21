@@ -3,7 +3,8 @@
  */
 import * as types from './../types'
 import func from '../../common/func'
-import { getLinkData } from '../../common/fetch'
+import { getLinkData } from '@/common/fetch'
+// import { bubbleSort } from '@/common/utils'
 // import placeData from '../../common/data/contents/place/place'
 // import { placeList } from '../../common/data/structure'
 // import minorityList from '../../common/data/contents/place/minority'
@@ -17,6 +18,7 @@ const state = {
   placeListIndexShow: [],
   minorityList: [],
   minorityListAll: [],
+  todayMinorityData: [],
   minorityContent: null
 }
 
@@ -24,6 +26,7 @@ const getters = {
   placeList: state => state.placeList,
   placeListShow: state => state.placeListShow,
   placeListIndexShow: state => state.placeListIndexShow,
+  todayMinorityData: state => state.todayMinorityData,
   activePlace: state => state.activePlace,
   minorityList: state => state.minorityList,
   minorityListAll: state => state.minorityListAll,
@@ -31,21 +34,31 @@ const getters = {
 }
 
 const mutations = {
+  // 所有省份
   [types.PLACE_LIST](state,data){
     state.placeList = data
     state.placeListShow = []
+    state.placeListIndexShow = []
     data.map(item => {
       if(item.show){
         state.placeListShow.push(item)
       }
     })
+    // 首页展示的少数民族（取少数民族最多的前五个省份）
+    // let newArr = bubbleSort(state.placeListIndexShow,'')
+    for(let i=0;i<5;i++){
+      state.placeListIndexShow.push(state.placeListShow[i])
+    }
   },
+  // 选中的省份
   [types.ACTIVE_PLACE](state,data){
     state.activePlace = data
   },
   // 系统所有少数民族
   [types.MINORITY_LIST_ALL](state,data){
     state.minorityListAll = data
+    // 今日少数民族，暂时随便取一个
+    state.todayMinorityData = data[2]
   },
   // 指定省份少数民族列表（副菜单）
   [types.MINORITY_LIST](state,data){

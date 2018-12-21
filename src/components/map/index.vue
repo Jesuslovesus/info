@@ -71,7 +71,7 @@
   position: relative;
   width: 100%;
   height: 230px;
-  transition: all .5s;
+  transition: all .3s;
   box-shadow: 0 0 6px #cccccc;  
   .fill{
     position: absolute;

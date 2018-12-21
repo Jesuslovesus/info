@@ -83,4 +83,8 @@ export default {
   p{
     text-align: center;
   }
+  .el-dialog{
+    // margin-top: 8vh;
+    max-width: 380px;
+  }
 </style>
